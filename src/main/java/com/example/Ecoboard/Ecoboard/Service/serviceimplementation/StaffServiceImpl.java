@@ -176,7 +176,7 @@ public class StaffServiceImpl implements StaffService {
 
         staffRepository.save(staff);
         sendingEmail(personRequest.getEmail());
-        return PersonResponse.builder().firstName(staff.getFirstName()).lastName(staff.getLastName())
+        return PersonResponse.builder()
                 .email(staff.getEmail()).message("Successful") .build();    }
 
 
@@ -262,7 +262,7 @@ public class StaffServiceImpl implements StaffService {
         String token = verificationTokenService.saveVerificationToken(staff);
         String link = "http://"+ website +"/person/confirm?token=" + token;
         String subject = "Confirm your email";
-        emailSender.sendMessage(subject, staff.getEmail(), buildEmail(staff.getFirstName(), link));
+        emailSender.sendMessage(subject, staff.getEmail(), buildEmail(staff.getUserName(), link));
         return PersonResponse.builder().message("Email sent").build();
     }
 
