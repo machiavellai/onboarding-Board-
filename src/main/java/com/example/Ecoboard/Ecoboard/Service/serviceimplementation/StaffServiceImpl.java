@@ -19,7 +19,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -79,9 +78,9 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public ResponseEntity<AuthResponse> loginUser(AuthRequest req) throws Exception {
         try {
-             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUserName(),
+             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(),
                     req.getPassword()));
-            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getUserName());
+            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getEmail());
             List<String> roles = staff.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
             final String jwt = jwtUtils.generateToken(staff);
@@ -91,7 +90,7 @@ public class StaffServiceImpl implements StaffService {
             for (String r : roles) {
                 if (r!=null) role = r;
             }
-            final PersonInfoResponse userInfo = getUserInfo(req.getUserName());
+            final PersonInfoResponse userInfo = getUserInfo(req.getEmail());
             res.setToken(jwt);
             res.setRole(role);
             res.setUserInfo(userInfo);
@@ -105,8 +104,7 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public ResponseEntity<AuthResponse> logoutUser(AuthRequest req) throws Exception {
         try {
-
-            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getUserName());
+            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getEmail());
             List<String> roles = staff.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
             final AuthResponse res = new AuthResponse();
             String role =null;
@@ -150,7 +148,6 @@ public class StaffServiceImpl implements StaffService {
         modelMapper.map(existingStaff,response);
         return response;
     }
-//private Date date = LocalDateTime.now();
     @Override
     public PersonResponse register(PersonRequest personRequest) throws IOException {
         boolean isValidEmail = emailValidator.test(personRequest.getEmail());
@@ -158,11 +155,11 @@ public class StaffServiceImpl implements StaffService {
             return PersonResponse.builder().message("Not a valid email").build();
         }
 
-        boolean isValidNumber = emailValidator.validatePhoneNumber(personRequest.getPhoneNumber());
-
-        if(!isValidNumber){
-            return PersonResponse.builder().message("Not a valid phone Number").build();
-        }
+//        boolean isValidNumber = emailValidator.validatePhoneNumber(personRequest.getPhoneNumber());
+//
+//        if(!isValidNumber){
+//            return PersonResponse.builder().message("Not a valid phone Number").build();
+//        }
 
         boolean userExists = staffRepository.findByEmail(personRequest.getEmail()).isPresent();
         if(userExists){
@@ -190,13 +187,16 @@ public class StaffServiceImpl implements StaffService {
                 .orElseThrow(()-> new PersonNotFoundException("Person Not Found"));
         String newPassword = changePasswordRequest.getNewPassword();
         String confirmPassword = changePasswordRequest.getConfirmPassword();
+
+
         if(bcryptPasswordEncoder.matches(changePasswordRequest.getCurrentPassword(), currentStaff.getPassword())){
             if (newPassword.equals(confirmPassword)) {
                 currentStaff.setPassword(bcryptPasswordEncoder.encode(newPassword));
                 staffRepository.save(currentStaff);
                 return new ChangePasswordResponse("Password successfully changed");
             }
-            else { return new ChangePasswordResponse("Confirm password does not match proposed password");}
+            else { return new ChangePasswordResponse("Confirm password does not match proposed password");
+            }
         }
         else {
             return new ChangePasswordResponse("Incorrect current password");

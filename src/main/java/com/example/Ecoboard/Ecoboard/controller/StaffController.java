@@ -34,7 +34,7 @@ public class StaffController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> rexgister (@Valid @RequestBody PersonRequest personRequest) throws IOException {
+    public ResponseEntity<?> register (@Valid @RequestBody PersonRequest personRequest) throws IOException {
         return ResponseEntity.ok(staffService.register(personRequest));
     }
     @GetMapping("/confirm")

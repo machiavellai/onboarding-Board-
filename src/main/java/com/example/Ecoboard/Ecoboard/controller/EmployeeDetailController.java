@@ -25,4 +25,6 @@ public class EmployeeDetailController {
         return ResponseEntity.ok(employeeDetailService.save(employeeDetailsRequest));
     }
 
+
+
 }

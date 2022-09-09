@@ -15,13 +15,13 @@ public class PersonRequest {
     @Size(min = 2, message = "username must not be less than 1")
     private String userName;
 
-    @NotEmpty(message = "first Name cannot be empty")
-    @Size(min = 2, message = "first Name must not be less than 2")
-    private String firstName;
-
-    @NotEmpty(message = "Last Name cannot be empty")
-    @Size(min = 2, message = "last Name must not be less than 2")
-    private String lastName;
+//    @NotEmpty(message = "first Name cannot be empty")
+//    @Size(min = 2, message = "first Name must not be less than 2")
+//    private String firstName;
+//
+//    @NotEmpty(message = "Last Name cannot be empty")
+//    @Size(min = 2, message = "last Name must not be less than 2")
+//    private String lastName;
 
     @Email
     private String email;
@@ -30,13 +30,13 @@ public class PersonRequest {
     @Size(min = 8, message = "password must not be less than 8")
     private String password;
 
-    @Size(min = 10, max = 14, message = "invalid Phone Number")
-    private String phoneNumber;
-
-    private String gender;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date dateOfBirth;
+//    @Size(min = 10, max = 14, message = "invalid Phone Number")
+//    private String phoneNumber;
+//
+//    private String gender;
+//
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//    private Date dateOfBirth;
 
 
 }
