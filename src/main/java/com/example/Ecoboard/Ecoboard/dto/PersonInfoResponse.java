@@ -15,19 +15,5 @@ import java.util.Date;
 public class PersonInfoResponse {
     private String email;
     private String userName;
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private String image;
-    private String phoneNumber;
-    private Date dateOfBirth;
-    private String dobText;
 
-
-    public String setDate(Date date) {
-        String pattern = "dd-MM-yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        final String dobText = simpleDateFormat.format(date);
-        return dobText;
-    }
 }

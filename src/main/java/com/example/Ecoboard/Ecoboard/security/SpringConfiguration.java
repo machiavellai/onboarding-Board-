@@ -51,6 +51,17 @@ public class SpringConfiguration extends WebSecurityConfigurerAdapter {
         http.cors();
     }
 
+
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+//                .and().authorizeRequests()
+//                .antMatchers(GET_AUTH_TOKEN,LOGIN,"/api/v1/user/register", "/api/v1/student/register", "/api/v1/student/login" ,"/api/v1/tokenPlain","/webjars/*", "/swagger-ui/*", "/v3/api-docs/*")
+//                .permitAll()
+//                .anyRequest().authenticated().and()
+////				.addFilter(new JWTAuthorizationFilter(authenticationManager()))
+//                // this disables session creation on Spring Security
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{

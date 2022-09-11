@@ -40,7 +40,7 @@ public class JwtUtils {
 
     public String generateToken(StaffDetails staffDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, staffDetails.getUsername());
+        return createToken(claims, staffDetails.getEmail());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {

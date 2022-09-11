@@ -78,11 +78,10 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public ResponseEntity<AuthResponse> loginUser(AuthRequest req) throws Exception {
         try {
-             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(),
+             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getUserName(),
                     req.getPassword()));
-            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getEmail());
+            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getUserName());
             List<String> roles = staff.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-
             final String jwt = jwtUtils.generateToken(staff);
             final AuthResponse res = new AuthResponse();
 
@@ -90,7 +89,7 @@ public class StaffServiceImpl implements StaffService {
             for (String r : roles) {
                 if (r!=null) role = r;
             }
-            final PersonInfoResponse userInfo = getUserInfo(req.getEmail());
+            final PersonInfoResponse userInfo = getUserInfo(req.getUserName());
             res.setToken(jwt);
             res.setRole(role);
             res.setUserInfo(userInfo);
@@ -104,7 +103,7 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public ResponseEntity<AuthResponse> logoutUser(AuthRequest req) throws Exception {
         try {
-            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getEmail());
+            final StaffDetails staff = userDetailsService.loadUserByUsername(req.getUserName());
             List<String> roles = staff.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
             final AuthResponse res = new AuthResponse();
             String role =null;
@@ -123,7 +122,7 @@ public class StaffServiceImpl implements StaffService {
                 .orElseThrow(()-> new PersonNotFoundException("Person Not Found"));
         PersonInfoResponse personInfoResponse = new PersonInfoResponse();
         modelMapper.map(staff, personInfoResponse);
-        personInfoResponse.setDobText(personInfoResponse.setDate(personInfoResponse.getDateOfBirth()));
+//        personInfoResponse.setEmail(personInfoResponse.setUserName(personInfoResponse.getEmail()););
         return getUserInfo(authentication.getName());
     }
 
@@ -132,7 +131,7 @@ public class StaffServiceImpl implements StaffService {
                 .orElseThrow(()-> new PersonNotFoundException("Person Not Found"));
         PersonInfoResponse personInfoResponse = new PersonInfoResponse();
         modelMapper.map(staff, personInfoResponse);
-        personInfoResponse.setDobText(personInfoResponse.setDate(personInfoResponse.getDateOfBirth()));
+//        personInfoResponse.setDobText(personInfoResponse.setDate(personInfoResponse.getDateOfBirth()));
         return personInfoResponse;
     }
 
@@ -262,7 +261,7 @@ public class StaffServiceImpl implements StaffService {
         String token = verificationTokenService.saveVerificationToken(staff);
         String link = "http://"+ website +"/person/confirm?token=" + token;
         String subject = "Confirm your email";
-        emailSender.sendMessage(subject, staff.getEmail(), buildEmail(staff.getUserName(), link));
+        emailSender.sendMessage(subject, staff.getEmail(), buildEmail(staff.getEmail(), link));
         return PersonResponse.builder().message("Email sent").build();
     }
 
