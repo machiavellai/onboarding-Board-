@@ -17,6 +17,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/staff")
 @AllArgsConstructor
+@CrossOrigin
 public class StaffController {
     private final StaffService staffService;
     public final VerificationService verificationTokenService;
