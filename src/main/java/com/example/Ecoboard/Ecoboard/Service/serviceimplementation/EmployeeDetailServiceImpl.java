@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @AllArgsConstructor
-
 public class EmployeeDetailServiceImpl implements EmployeeDetailService {
     private final ModelMapper modelMapper;
     private final EmployeeDetailRepository employeeDetailRepository;

@@ -3,6 +3,7 @@ package com.example.Ecoboard.Ecoboard.controller;
 import com.example.Ecoboard.Ecoboard.Service.StaffService;
 import com.example.Ecoboard.Ecoboard.Service.VerificationService;
 import com.example.Ecoboard.Ecoboard.dto.*;
+import com.example.Ecoboard.Ecoboard.model.Staff;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +69,8 @@ public class StaffController {
         return ResponseEntity.ok().body(staffService.updateResetPassword(passwordRequest, email));
 
     }
-
-
+//    @PostMapping(value = {"/addStaff_Image"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+//    public Staff addNewStaffImage(@RequestBody Staff staff){
+//        return
+//    }
 }

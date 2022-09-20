@@ -93,6 +93,7 @@ public class StaffServiceImpl implements StaffService {
             res.setToken(jwt);
             res.setRole(role);
             res.setUserInfo(userInfo);
+
             return ResponseEntity.ok().body(res);
         }
         catch (Exception e) {
@@ -111,6 +112,7 @@ public class StaffServiceImpl implements StaffService {
                 if (r!=null) role = r;
             }
             return ResponseEntity.ok().body(res);
+
         } catch (Exception e) {
             throw new Exception("Incorrect username or password!", e);
         }
@@ -122,7 +124,7 @@ public class StaffServiceImpl implements StaffService {
                 .orElseThrow(()-> new PersonNotFoundException("Person Not Found"));
         PersonInfoResponse personInfoResponse = new PersonInfoResponse();
         modelMapper.map(staff, personInfoResponse);
-//        personInfoResponse.setEmail(personInfoResponse.setUserName(personInfoResponse.getEmail()););
+//        personInfoResponse.setEmail(personInfoResponse.setUserName(personInfoResponse.getEmail()));
         return getUserInfo(authentication.getName());
     }
 

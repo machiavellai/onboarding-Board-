@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Set;
 
 //@AllArgsConstructor
 @NoArgsConstructor
@@ -22,13 +23,6 @@ public class Staff {
     @Column(name = "user_name", unique = true, nullable = false)
     private String userName;
 
-//
-//    @Column(name = "first_name", nullable = false)
-//    private String firstName;
-//
-//
-//    @Column(name = "last_name", nullable = false)
-//    private String lastName;
 
 
     @Column(unique = true, nullable = false)
@@ -46,17 +40,17 @@ public class Staff {
     @Column(name = "verify_email", nullable = false)
     private boolean verifyEmail = false;
 
-//
-//    @Column(nullable = false)
-//    private String gender;
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(name = "staff_images",
+//            joinColumns = {
+//                @JoinColumn(name = "staff_id" )
+//            },
+//            inverseJoinColumns = {
+//                @JoinColumn(name = "image_id")
+//            }
+//    )
+//    private Set<ImageModel> staffImages;
 
-   
-//    @Column(name = "date_of_birth", nullable = false)
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-//    private Date dateOfBirth;
-//
-//    private String image;
-//
     private String resetPasswordToken;
 
     public Staff(Long id, String email, String userName, String password) {

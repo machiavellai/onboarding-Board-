@@ -55,8 +55,8 @@ public class EmployeeDetail {
     @Column(name = "disability_check", unique = true, nullable = false)
     private String disabilityCheck;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "staff_id", referencedColumnName = "id", nullable = false)
-    private Staff staff;
+//    @OneToOne(cascade = CascadeType.ALL, optional = false)
+//    @JoinColumn(name = "staff_id", referencedColumnName = "id", nullable = false)
+//    private Staff staff;
 
 }

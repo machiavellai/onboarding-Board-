@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonInfoResponse {
-    private String email;
-    private String userName;
-
+        private String email;
+        private String userName;
+        private String message;
 }

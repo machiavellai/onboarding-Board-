@@ -126,26 +126,6 @@
 			<scope>test</scope>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>io.springfox</groupId>-->
-<!--			<artifactId>springfox-boot-starter</artifactId>-->
-<!--			<version>3.0.0</version>-->
-<!--		</dependency>-->
-
-		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
-		<!--<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>3.0.0</version>
-		</dependency>-->
-		<!-- https://mvnrepository.com/artifact/io.openapitools.swagger/swagger-maven-plugin -->
-		<!--<dependency>
-			<groupId>io.openapitools.swagger</groupId>
-			<artifactId>swagger-maven-plugin</artifactId>
-			<version>2.1.6</version>
-		</dependency>-->
-
-
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
