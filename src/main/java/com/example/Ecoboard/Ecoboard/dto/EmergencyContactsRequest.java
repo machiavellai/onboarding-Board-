@@ -15,6 +15,11 @@ public class EmergencyContactsRequest {
 
     private String contactName_one_address;
 
+    private String contactName_one_relationship;
+
+    private String contactName_one_number;
+
+
     private String contactName_two;
 
     private String contactName_two_relationship;
@@ -23,7 +28,6 @@ public class EmergencyContactsRequest {
 
     private String contactName_two_address;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date date;
+
 
 }

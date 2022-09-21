@@ -60,10 +60,7 @@ public class EmergencyContact {
     @Column(name = "contactName_two_address", unique = true, nullable = false)
     private String contactName_two_address;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "staff_id", referencedColumnName = "id", nullable = false)
-    private Staff staff;
 
-    private LocalDateTime date_created;
+
 
 }
